@@ -2,6 +2,7 @@ package model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,34 @@ public class EmployeeOperations {
         }
 
 
+        //Sorting employees based on their salary in ascending order using Stream API
+        List<Employee> salaryBasedSortedEmployee = employees.stream()  //creating stream of Employee objects
+                                                    .sorted((e1, e2) -> Double.compare(e1.getSalary(), e2.getSalary()))  //sorting employees based on salary using comparator
+                                                    .collect(Collectors.toList());
+        
+        //printing the sorted list of employees based on salary
+        System.out.println("Employee list based on salary");
+
+        //iterating through the sorted list and printing employee name and salary
+        for(Employee employee: salaryBasedSortedEmployee){
+            System.out.println("Name of employee: " + employee.getName() + " and employee salary: " + employee.getSalary());
+        }
+                                                    
+
+        //Grouping employees based on their department using Stream API
+        Map<String, List<Employee>> groupedEmployee = employees.stream()  //creating stream of Employee objects
+                                                        .collect(Collectors.groupingBy(
+                                                            Employee::getDepartment  //grouping by department
+                                                        ));
+        
+        //printing the grouped employees based on department
+        groupedEmployee.forEach((dept, empList) -> {   //iterating through the map of department and list of employees
+            System.out.println("Department: " + dept); //printing department name
+            System.out.println("Employees working in " + dept + " department"); //printing employees in that department
+            for(Employee employee: empList){
+                System.out.println(employee.getName()); //printing employee name
+            }
+        });
 
         sc.close(); //closing the scanner object to prevent resource leak
     }
