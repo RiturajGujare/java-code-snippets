@@ -31,6 +31,19 @@ public class EmployeeOperations {
                                 .orElse(0);
         System.out.println("Average salary of employees is: " + averageSalary);
 
+        //Filtering employees who earn more than the average salary
+        //Using Stream API to filter employees based on their salary compared to the average salary
+        List<Employee> employeeEarningMoreThanAverage = employees.stream()
+                                                        .filter((employee -> employee.getSalary() > averageSalary)) //filtering employees whose salary is greater than average salary   
+                                                        .collect(Collectors.toList());
+        
+        System.out.println("Employees earning more than average are");
+        for(Employee employee: employeeEarningMoreThanAverage){
+            //iterating through the list of employees earning more than average and printing their name and salary
+            //Using getName() and getSalary() methods of Employee class to fetch employee details
+            System.out.println("Name of Employee: " + employee.getName() + " and his salary is: " + employee.getSalary());
+        }
+
         //snippet to filter employees by department
         Scanner sc = new Scanner(System.in);   //Scanner object to take user input
         System.out.println("Enter the department whose employee are to be fetched: ");
@@ -74,6 +87,8 @@ public class EmployeeOperations {
                 System.out.println(employee.getName()); //printing employee name
             }
         });
+
+
 
         sc.close(); //closing the scanner object to prevent resource leak
     }
