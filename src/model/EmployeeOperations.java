@@ -104,23 +104,45 @@ public class EmployeeOperations {
         //example to find the employee with the highest salary using Stream API
         //Using sorted() method to sort employees based on salary in descending order and then finding the first employee in the sorted list
         //Also using max() method with Comparator to find the employee with the highest salary
-        Employee employee = employees.stream()
+        Employee employeeWithHighestSalary = employees.stream()
                             //sorting employees based on salary in descending order, e2.getSalary() is compared with e1.getSalary() because we want the highest salary first
                             .sorted((e1, e2) -> Double.compare(e2.getSalary(), e1.getSalary())) 
                             .findFirst()
                             .orElse(null);
-        System.out.println("Highest salaried employee is: " + employee.getName() + " and his salary is: " + employee.getSalary());
+        System.out.println("Highest salaried employee is: " + employeeWithHighestSalary.getName() + " and his salary is: " + employeeWithHighestSalary.getSalary());
 
         //Using max() method with Comparator to find the employee with the highest salary
         //comparing employee salary using comparingDouble method of Comparator
-        Employee employee2 = employees.stream()
+        Employee employeeWithHighestSalary2 = employees.stream()
                             .max(Comparator.comparingDouble(Employee::getSalary))
                             .orElse(null);
-        System.out.println("Highest salaried employee calculated using comparingDouble method is: " + employee2.getName() + " and his salary is: " + employee2.getSalary());
+        System.out.println("Highest salaried employee calculated using comparingDouble method is: " + employeeWithHighestSalary2.getName() + " and his salary is: " + employeeWithHighestSalary2.getSalary());
 
         System.out.println("-----------------------------------");
         System.out.println("--------------------------------");
 
+        //example to find the employee with the lowest salary using Stream API
+        //Using sorted() method to sort employees based on salary in ascending order and then finding the first employee in the sorted list
+        //Also using min() method with Comparator to find the employee with the lowest salary
+        Employee employeeWithLowestSalary = employees.stream()
+                                            //sorting employees based on salary in ascending order, e1.getSalary() is compared with e2.getSalary() because we want the lowest salary first
+                                            //Using Double.compare() to compare salaries
+                                            .sorted((e1, e2) -> Double.compare(e1.getSalary(), e2.getSalary()))
+                                            .findFirst()
+                                            .orElse(null);
+        System.out.println("Lowest salaried employee is: " + employeeWithLowestSalary.getName() + " and his salary is: " + employeeWithLowestSalary.getSalary());
+
+        //Using min() method with Comparator to find the employee with the lowest salary
+        //comparing employee salary using comparingDouble method of Comparator
+        Employee employeeWithLowestSalary2 = employees.stream()
+                                            .min(Comparator.comparingDouble(Employee::getSalary))
+                                            .orElse(null);
+        System.out.println("Lowest salaried employee calculated using comparingDouble method is: " + employeeWithLowestSalary2.getName() + " and his salary is: " + employeeWithLowestSalary2.getSalary());
+
+        System.out.println("-----------------------------------");
+        System.out.println("--------------------------------");
+
+        
         sc.close(); //closing the scanner object to prevent resource leak
     }
 }
