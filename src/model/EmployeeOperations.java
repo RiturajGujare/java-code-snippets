@@ -155,6 +155,26 @@ public class EmployeeOperations {
             employee -> {System.out.println(employee.getName());}
         );
 
+        System.out.println("-----------------------------------");
+        System.out.println("--------------------------------"); 
+
+        //Counting number of employees in each department using Stream API
+        //Using groupingBy() method to group employees by department and then counting the number of employees
+        Map<String, List<Employee>> employeePerDepartment = employees.stream()
+                                                            .collect(Collectors.groupingBy(
+                                                                Employee::getDepartment
+                                                            ));
+
+        //printing the number of employees in each department
+        System.out.println("Employee per Department");
+        employeePerDepartment.forEach((department, employeeList) -> { //iterating through the map of department and list of employees
+            System.out.println("Department: " + department);
+            System.out.println("Employee in " + department + " department are: " + employeeList.size()); //printing the number of employees in that department using size() method of List interface
+        });
+
+        System.out.println("-----------------------------------");
+        System.out.println("--------------------------------");
+
         sc.close(); //closing the scanner object to prevent resource leak
     }
 }
