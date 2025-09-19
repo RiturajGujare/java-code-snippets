@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -24,6 +25,19 @@ public class EmployeeOperations {
             new Employee(105, "Vivek", "Sales", 5000),
             new Employee(106, "Daylu", "HR", 3000)
         );
+
+        //Calculating total number of departments using Stream API
+        //Using map() method to extract department names and then using collect() method to collect unique department names into a Set
+        Set<String> departments = employees.stream()
+                                    .map(employee -> employee.getDepartment()) //extracting department names using getDepartment() method of Employee class
+                                    .collect(Collectors.toSet()); //collecting unique department names into a Set to avoid duplicates
+        
+        //Printing the total number of unique departments and the department names
+        System.out.println("Total department present are: " + departments.size() + " and those departments are: " + departments);
+
+        System.out.println("-----------------------------------");
+        System.out.println("--------------------------------");
+
 
         //Calculating average salary of all employees using Stream API
         double averageSalary = employees.stream()
@@ -174,6 +188,21 @@ public class EmployeeOperations {
 
         System.out.println("-----------------------------------");
         System.out.println("--------------------------------");
+
+        //Calculating average salary per department using Stream API
+        //Using groupingBy() method to group employees by department and then using averagingDouble() method to calculate average salary
+        Map<String, Double> averageSalaryPerDepartment = employees.stream()
+                                                        .collect(Collectors.groupingBy(
+                                                            Employee::getDepartment, //grouping by department
+                                                            Collectors.averagingDouble(Employee::getSalary) //calculating average salary
+                                                        ));
+
+        //printing the average salary per department
+        System.out.println("Average salary per department");
+        for(Map.Entry<String, Double> mapEntry : averageSalaryPerDepartment.entrySet()){
+            System.out.println("Department: " + mapEntry.getKey() + " has average salary: " + mapEntry.getValue());
+        }
+
 
         sc.close(); //closing the scanner object to prevent resource leak
     }
