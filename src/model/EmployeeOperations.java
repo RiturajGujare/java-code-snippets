@@ -142,7 +142,19 @@ public class EmployeeOperations {
         System.out.println("-----------------------------------");
         System.out.println("--------------------------------");
 
-        
+        //Sorting employees by name using Stream API
+        //Using sorted() method with a custom comparator to sort employees by their names in alphabetical order
+        List<Employee> employeesSortedByName = employees.stream()
+                                                .sorted((e1,e2) -> e1.getName().compareTo(e2.getName())) //used compareTo() method of String class to compare employee names
+                                                .collect(Collectors.toList());
+
+        //printing the sorted list of employees by name
+        //Using forEach() method to iterate through the sorted list and print employee names
+        System.out.println("Employees sorted by name");
+        employeesSortedByName.forEach(
+            employee -> {System.out.println(employee.getName());}
+        );
+
         sc.close(); //closing the scanner object to prevent resource leak
     }
 }
