@@ -32,15 +32,17 @@ public class SortMapByValues {
         System.out.println("Sorted fruit map based on value in ascending order");
         System.out.println(sortedFruitMapInAscendingOrder);
 
+        // Sorting the map by values in descending order
         Map<String, Integer> sortedFruitMapInDescendingOrder = mapOfFruit.entrySet()
-                                                                .stream()
-                                                                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                                                                .stream()  // Converting map to stream
+                                                                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) // Sorting by value in descending order
                                                                 .collect(Collectors.toMap(
                                                                     Map.Entry::getKey, 
                                                                     Map.Entry::getValue,
                                                                     (e1, e2) -> e1,
                                                                     LinkedHashMap::new));
         
+        //printing the sorted map in descending order
         System.out.println("Sorted fruit map based on value in descending order");
         System.out.println(sortedFruitMapInDescendingOrder);
 
