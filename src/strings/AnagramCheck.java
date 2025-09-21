@@ -37,11 +37,13 @@ public class AnagramCheck {
         // If lengths are not equal, they cannot be anagrams
         if(firstWord.length() != secondWord.length()){
             System.out.println("Not Anagram");
+            sc.close(); // Closing the scanner to prevent resource leaks
             return;  // Exiting the program
         }
         
         // Comparing the sorted character arrays
         System.out.println(Arrays.equals(array1, array2) ? "Anagram ": " Not Anagram" );
-        
+
+        sc.close(); // Closing the scanner to prevent resource leaks
     }
 }

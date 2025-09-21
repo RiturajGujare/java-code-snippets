@@ -23,6 +23,7 @@ public class Factorial {
         // Handling edge cases for 0! and 1!
         if(numberCopy == 1 || numberCopy == 0){
             System.out.println(1);
+            sc.close(); // Closing the scanner to prevent resource leaks
             return;  // Exiting the program
         }
 
