@@ -1,6 +1,5 @@
 package strings;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*
