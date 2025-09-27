@@ -44,5 +44,20 @@ public class MissingNumber {
 
         // Displaying the missing number
         System.out.println("Missing number from the list is: " + (expectedSum - actualSum));
+
+        //method3: using XOR operation
+        int xor1 = 0; // XOR of all elements in the list
+        int xor2 = 0; // XOR of all numbers from 1 to n     
+
+        for(int num : sortedNumbers){
+            xor1 ^= num; // XORing all elements in the list
+        }   
+
+        for(int i = 1; i <= n; i++){
+            xor2 ^= i; // XORing all numbers from 1 to n
+        }       
+
+        // The missing number is the XOR of xor1 and xor2
+        System.out.println("Missing number from the list is: " + (xor1 ^ xor2));
     }
 }
