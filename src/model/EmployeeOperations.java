@@ -207,15 +207,21 @@ public class EmployeeOperations {
         System.out.println("-----------------------------------");
         System.out.println("--------------------------------");
         
+        //Finding the employee with the highest salary per department using Stream API
+        //Using groupingBy() method to group employees by department and then using maxBy() method to find the employee with the highest salary in each department
         Map<String, Optional<Employee>> departmentAndHighestSalary = employees.stream()
                                                                     .collect(Collectors.groupingBy(
-                                                                        Employee::getDepartment,
-                                                                        Collectors.maxBy(Comparator.comparing(Employee::getSalary))
+                                                                        Employee::getDepartment, //grouping by department
+                                                                        Collectors.maxBy(Comparator.comparing(Employee::getSalary))  //finding the employee with the highest salary using maxBy() method and Comparator
                                                                     ));
         
+        
         System.out.println("Highest salary employee per department");
+        //iterating through the map of department and highest salary employee
         for(Map.Entry<String, Optional<Employee>> entry: departmentAndHighestSalary.entrySet()){
-            System.out.println("Department: " + entry.getKey());
+            System.out.println("Department: " + entry.getKey()); //printing department name
+
+            //printing employee name and salary using ifPresent() method of Optional class to avoid NullPointerException
             entry.getValue().ifPresent(employee -> System.out.println(employee.getName() + employee.getSalary()));
         }
 
