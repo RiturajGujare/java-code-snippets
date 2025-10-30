@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -203,6 +204,20 @@ public class EmployeeOperations {
             System.out.println("Department: " + mapEntry.getKey() + " has average salary: " + mapEntry.getValue());
         }
 
+        System.out.println("-----------------------------------");
+        System.out.println("--------------------------------");
+        
+        Map<String, Optional<Employee>> departmentAndHighestSalary = employees.stream()
+                                                                    .collect(Collectors.groupingBy(
+                                                                        Employee::getDepartment,
+                                                                        Collectors.maxBy(Comparator.comparing(Employee::getSalary))
+                                                                    ));
+        
+        System.out.println("Highest salary employee per department");
+        for(Map.Entry<String, Optional<Employee>> entry: departmentAndHighestSalary.entrySet()){
+            System.out.println("Department: " + entry.getKey());
+            entry.getValue().ifPresent(employee -> System.out.println(employee.getName() + employee.getSalary()));
+        }
 
         sc.close(); //closing the scanner object to prevent resource leak
     }
